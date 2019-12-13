@@ -6,10 +6,4 @@ let userData = [
     }
 ];
 
-
-// function compare(){
-//     // totul sum of (absolute value of subtracted inputs each index) from database of existing users
-//     // first lowest sum is most similar == friend found
-
-//     // Display as MODAL POP UP (name and picture)
-// }
+module.exports(userData);

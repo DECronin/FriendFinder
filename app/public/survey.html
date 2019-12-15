@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FF Survey</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>Survey <a href="./home.html">Home</a></header> 
@@ -36,19 +38,56 @@
             <input type="range" id="q8" min="1" max="5"> <br>
             9==============
             <input type="range" id="q9" min="1" max="5"> <br>
-            10==============
+            10=============
             <input type="range" id="q10" min="1" max="5"> <br>
             <!-- can be created dinamically from array through loop then referanced with i? -->
         </div>
     </form>
-    <button id="submit">Submit</button>
-    <script>
-    //event listener on submit button
-        // event.preventDefault();
-        // format input into object for JSON
-        // post data to api (if it doesn't aleady exsist)
-        // reset page to empty inputs
+    <button id="submit" onclick="sendData()">Submit</button>
 
+    <div id="modal-overlay">
+        <div id="modal">
+                <img src="" alt="Your matches photo" id="modal-image">
+                <h2>Name: <span id="modal-name"></span></h2>
+        </div>
+    </div>
+
+    <script>
+
+        function sendData(){
+            event.preventDefault();
+            let userInputs = {
+                "name" : document.getElementById("username").value.tpString(),
+                "photo" : document.getElementById("image").value.toString(),
+                "scores" : [
+                    parseInt(document.getElementById("q1").value),
+                    parseInt(document.getElementById("q2").value),
+                    parseInt(document.getElementById("q3").value),
+                    parseInt(document.getElementById("q4").value),
+                    parseInt(document.getElementById("q5").value),
+                    parseInt(document.getElementById("q6").value),
+                    parseInt(document.getElementById("q7").value),
+                    parseInt(document.getElementById("q8").value),
+                    parseInt(document.getElementById("q9").value),
+                    parseInt(document.getElementById("q10").value)
+                ]
+            }
+
+            $.post("./api/friends", userInputs, function(data){
+                if(data){
+                    alert(`Survey Recieved. Please wait while we calculate your results.`);
+                } else {
+                    alert(`Please Provide Valid Inputs.`)
+                }
+            })
+
+            $.post("/api/friends", person, data => {
+                $("#modal-name").text(data.name);
+                $("#modal-image").attr("src", data.image);
+                $("#modal-overlay").show();
+            });
+            // reset page to empty inputs?
+        }
     </script>
 </body>
 </html>

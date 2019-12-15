@@ -47,7 +47,7 @@
         </div>
     </form>
     <button id="submit" onclick="sendData()">Submit</button>
-    <a href="./api/friends">Friends API</a>
+    <a href="./api/friends" target="_blank">Friends API</a>
 
     <!-- <div id="modal-overlay">
         <div id="modal">
@@ -80,7 +80,7 @@
             console.log(`userInput-on-survey: ${JSON.stringify(userInputs)}`);
 
             $.post("/api/friends", userInputs, function (data) {
-                console.log(`survey-post-data: ${data}`);
+                console.log(`survey-post-data: ${JSON.stringify(data)}`);
                 if (data) {
                     alert(`Survey Recieved. Please wait while we calculate your results.`);
                 } else {

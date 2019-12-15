@@ -129,12 +129,11 @@
         }
 
         function compare(array) {
-            let user = userInputs;
             let friends = [];
             array.forEach(e => {
                 let diff = 0;
                 for (i = 0; i < 10; i++) {
-                    diff += Math.abs(user.scores[i] - parseInt(e.scores[i]));
+                    diff += Math.abs(userInputs.scores[i] - parseInt(e.scores[i]));
                 }
                 friends.push(diff);
             });

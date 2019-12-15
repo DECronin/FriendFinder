@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FF Survey</title>
     <!-- <link rel="stylesheet" href="./style.css"> -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <header>Survey <a href="./home.html">Home</a></header> 
+    <header>Survey <a href="./home">Home</a></header>
     <form>
         <div class="user">
             <h1>User Details:</h1>
-            Username: 
+            Username:
             <input type="text" id="username"><br>
-            Image Link: 
+            Image Link:
             <input type="url" id="image"><br>
         </div>
         <div class="survey">
@@ -44,6 +47,7 @@
         </div>
     </form>
     <button id="submit" onclick="sendData()">Submit</button>
+    <a href="./api/friends">Friends API</a>
 
     <!-- <div id="modal-overlay">
         <div id="modal">
@@ -54,12 +58,12 @@
 
     <script>
 
-        function sendData(){
+        function sendData() {
             event.preventDefault();
             let userInputs = {
-                "name" : $("#username").val().trim().toString(),
-                "photo" : $("#image").val().trim().toString(),
-                "scores" : [
+                "name": $("#username").val().trim().toString(),
+                "photo": $("#image").val().trim().toString(),
+                "scores": [
                     parseInt($("#q1").val()),
                     parseInt($("#q2").val()),
                     parseInt($("#q3").val()),
@@ -75,9 +79,9 @@
 
             console.log(`userInput-on-survey: ${JSON.stringify(userInputs)}`);
 
-            $.post("/api/friends", userInputs, function(data){
+            $.post("/api/friends", userInputs, function (data) {
                 console.log(`survey-post-data: ${data}`);
-                if(data){
+                if (data) {
                     alert(`Survey Recieved. Please wait while we calculate your results.`);
                 } else {
                     alert(`Please Provide Valid Inputs.`)
@@ -92,36 +96,38 @@
             // reset page to empty inputs?
         }
 
-        function displayResult(){
+        function displayResult() {
             $.ajax({ url: "/api/friends", method: "GET" })
-      .then(function(arrayData) {
-          console.log(arrayData);
+            .then(function (arrayData) {
+                console.log(arrayData);
 
-        // Loop through and display each of the customers
-        for (var i = 0; i < tableData.length; i++) {
+                console.log(`\n-----------------------\ncomparing results\n----------------------\n` + compare(arrayData));
 
-          // Get a reference to the tableList element and populate it with tables
-          var tableList = $("#tableList");
+                // Loop through and display each of the customers
+                // for (var i = 0; i < tableData.length; i++) {
 
-          // Then display the fields in the HTML (Section Name, Date, URL)
-          var listItem = $("<li class='list-group-item mt-4'>");
+                //     // Get a reference to the tableList element and populate it with tables
+                //     var tableList = $("#tableList");
 
-          listItem.append(
-            $("<h2>").text("Table #" + (i + 1)),
-            $("<hr>"),
-            $("<h2>").text("ID: " + tableData[i].customerID),
-            $("<h2>").text("Name: " + tableData[i].customerName),
-            $("<h2>").text("Email: " + tableData[i].customerEmail),
-            $("<h2>").text("Phone: " + tableData[i].phoneNumber)
-          );
+                //     // Then display the fields in the HTML (Section Name, Date, URL)
+                //     var listItem = $("<li class='list-group-item mt-4'>");
 
-          tableList.append(listItem);
-        }
-      });
+                //     listItem.append(
+                //         $("<h2>").text("Table #" + (i + 1)),
+                //         $("<hr>"),
+                //         $("<h2>").text("ID: " + tableData[i].customerID),
+                //         $("<h2>").text("Name: " + tableData[i].customerName),
+                //         $("<h2>").text("Email: " + tableData[i].customerEmail),
+                //         $("<h2>").text("Phone: " + tableData[i].phoneNumber)
+                //     );
+
+                //     tableList.append(listItem);
+                // }
+            });
         }
 
         function compare(array) {
-            let user = array[array.length - 1];
+            let user = userInputs;
             let friends = [];
             array.forEach(e => {
                 let diff = 0;
@@ -132,7 +138,7 @@
             });
 
             for (k = 0; k < 50; k++) {
-                for (j = 0; j < friends.length; j++){
+                for (j = 0; j < friends.length; j++) {
                     if (friends[j] == k) {
                         return array[j]
                     }
@@ -145,5 +151,7 @@
         }
 
     </script>
+    
 </body>
+
 </html>

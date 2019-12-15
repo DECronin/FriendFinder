@@ -49,12 +49,7 @@
     <button id="submit" onclick="sendData()">Submit</button>
     <a href="./api/friends" target="_blank">Friends API</a>
 
-    <!-- <div id="modal-overlay">
-        <div id="modal">
-                <img src="" alt="Your matches photo" id="modal-image">
-                <h2>Name: <span id="modal-name"></span></h2>
-        </div>
-    </div> -->
+    <div id="modal-overlay"></div>
 
     <script>
 
@@ -81,50 +76,29 @@
 
             console.log(`userInput-on-survey: ${JSON.stringify(userInputs)}`);
 
+            displayResult()
+
             $.post("/api/friends", userInputs, function (data) {
                 if (data) {
                     alert(`Survey Recieved. Please wait while we calculate your results.`);
                 } else {
                     alert(`Please Provide Valid Inputs.`)
                 }
-                displayResult();
-            })
-
-            // $.post("/api/friends", person, data => {
-            //     $("##modal-name").text(data.name);
-            //     $("##modal-image").attr("src", data.image);
-            //     $("##modal-overlay").show();
-            // });
+            });
+            
             // reset page to empty inputs?
         }
 
         function displayResult() {
             $.ajax({ url: "/api/friends", method: "GET" })
             .then(function (arrayData) {
-                parseInt(arrayData.scores);
-                console.log(JSON.stringify(arrayData));
-                console.log(`-----------------------\ncomparing results\n----------------------\n` + JSON.stringify(compare(arrayData)));
-
-                // Loop through and display each of the customers
-                // for (var i = 0; i < tableData.length; i++) {
-
-                //     // Get a reference to the tableList element and populate it with tables
-                //     var tableList = $("#tableList");
-
-                //     // Then display the fields in the HTML (Section Name, Date, URL)
-                //     var listItem = $("<li class='list-group-item mt-4'>");
-
-                //     listItem.append(
-                //         $("<h2>").text("Table #" + (i + 1)),
-                //         $("<hr>"),
-                //         $("<h2>").text("ID: " + tableData[i].customerID),
-                //         $("<h2>").text("Name: " + tableData[i].customerName),
-                //         $("<h2>").text("Email: " + tableData[i].customerEmail),
-                //         $("<h2>").text("Phone: " + tableData[i].phoneNumber)
-                //     );
-
-                //     tableList.append(listItem);
-                // }
+                let closestFriend = compare(arrayData);
+                console.log(JSON.stringify(closestFriend));
+                const modal = $("<div id='modal'>");
+                let name = $(`<h2>${closestFriend.name}</h2>`);
+                let img = $(`<img src="${closestFriend.photo}" alt="Your New Best Friend">`)
+                modal.append(name, img);
+                $("#modal-overlay").append(modal);
             });
         }
 

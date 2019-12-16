@@ -6,12 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FF Survey</title>
-    <!-- <link rel="stylesheet" href="./style.css"> -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <style>
+        body {
+            position: relative;
+            background-color: violet;
+        }
+
+        #modal {
+            border: red 3px solid;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            max-width: 960px;
+            width: 90%;
+            height: 400px;
+            max-height: 100%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            overflow: auto;
+            padding: 25px;
+        }
+
+        #modal-image {
+            width: 50%;
+        }
+
+        #modal-overlay {
+            border: springgreen solid 8px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000aa;
+            display: none;
+        }
+    </style>
+
     <header>Survey <a href="./home">Home</a></header>
     <form>
         <div class="user">
@@ -54,6 +90,7 @@
     <script>
 
         let userInputs;
+        $("#modal-overlay").css("display", "none");
 
         function sendData() {
             event.preventDefault();
@@ -85,21 +122,23 @@
                     alert(`Please Provide Valid Inputs.`)
                 }
             });
-            
+
             // reset page to empty inputs?
         }
 
         function displayResult() {
             $.ajax({ url: "/api/friends", method: "GET" })
-            .then(function (arrayData) {
-                let closestFriend = compare(arrayData);
-                console.log(JSON.stringify(closestFriend));
-                const modal = $("<div id='modal'>");
-                let name = $(`<h2>${closestFriend.name}</h2>`);
-                let img = $(`<img src="${closestFriend.photo}" alt="Your New Best Friend">`)
-                modal.append(name, img);
-                $("#modal-overlay").append(modal);
-            });
+                .then(function (arrayData) {
+                    $("#modal-overlay").empty();
+                    let closestFriend = compare(arrayData);
+                    console.log(JSON.stringify(closestFriend));
+                    const modal = $("<div id='modal'>");
+                    let name = $(`<h2>${closestFriend.name}</h2>`);
+                    let img = $(`<img src="${closestFriend.photo}" alt="Your New Best Friend">`)
+                    modal.append(name, img);
+                    $("#modal-overlay").append(modal);
+                    $("#modal-overlay").css("display", "block");
+                });
         }
 
         function compare(array) {
@@ -120,12 +159,10 @@
             }
 
             return { name: "Error", image: "https://cdn.shopify.com/s/files/1/0322/6897/files/404-permalink.png?432866230176278629", scores: [404] }
-
-            // Display as MODAL POP UP (name and picture)
         }
 
     </script>
-    
+
 </body>
 
 </html>

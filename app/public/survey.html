@@ -11,10 +11,79 @@
 </head>
 
 <body>
-    <style>
+    <style type="text/css">
         body {
             position: relative;
-            background-color: violet;
+            background: url("https://c.pxhere.com/photos/46/03/blank_branding_identity_business_business_cards_clean_coffee_desk_mobile-912617.jpg!d");
+            background-size: 135vw;
+            background-position: -20vw -10vh;
+            text-align: center;
+        }
+
+        form{
+            position: fixed;
+            top: 13vh;
+            right: 7.5vw;
+            padding: 15px;
+        }
+
+        header{
+            position: fixed;
+            top: 25vh;
+            left: 17vw;
+            color: blanchedalmond;
+            font-size: 50px;
+            font-weight: bolder;
+        }
+
+        #home-btn{
+            color: cadetblue;
+            font-size: 40px;
+            font-weight: lighter;
+        }
+
+        #links{
+            position: fixed;
+            bottom: 6.5vh;
+            left: 18.75vw;
+        }
+        a{
+            color: darkolivegreen;
+            font-size: 20px;
+        }
+
+        #submit{
+            font-size: 30px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: rgb(33, 33, 58,0.85);
+            color: blanchedalmond;
+            border: cadetblue 2px double;
+            position: fixed;
+            left: 18.25vw;
+            bottom: 21vh;
+        }
+
+        .user, .survey{
+            padding: 15px;
+            margin: 10px;
+        }
+
+        .user{
+            color: rgb(33, 33, 58);
+            background-color: rgba(173, 142, 102,0.15);
+            border-radius: 50%;
+        }
+        
+        .survey{
+            color: rgb(59, 43, 8);
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        input{
+            background-color: rgba(230, 206, 174, 0.4);
         }
 
         #modal {
@@ -46,45 +115,48 @@
             background: #000000aa;
             display: none;
         }
+
     </style>
 
-    <header>Survey <a href="./home">Home</a></header>
+    <header>Survey <br><a href="./home" id="home-btn">Home</a></header>
     <form>
         <div class="user">
             <h1>User Details:</h1>
             Username:
-            <input type="text" id="username"><br>
+            <input type="text" id="username"><br><br>
             Image Link:
             <input type="url" id="image"><br>
         </div>
         <div class="survey">
-            Slide the bar Left(Agree) and Right(Disagrre) along the 5 points as needed. [Middle is Neutral]. <br><br>
-            1==============
+            Slide the bar  along the 5 points as needed. <br>[Left(Agree) || Middle(Neutral) || Right(Disagree)]. <br><br>
+            1) You feel drawn to the unusual/unexplainable.
             <input type="range" id="q1" min="1" max="5"> <br>
-            2==============
+            2) You always make sure there's enough "You"-time in your week.
             <input type="range" id="q2" min="1" max="5"> <br>
-            3==============
+            3) You have a morbid or often misunderstood sense of humor.
             <input type="range" id="q3" min="1" max="5"> <br>
-            4==============
+            4) Astrology / Zodiac signs do nothing but confuse you.
             <input type="range" id="q4" min="1" max="5"> <br>
-            5==============
+            5) They should bring back MySpace.
             <input type="range" id="q5" min="1" max="5"> <br>
-            6==============
+            6) There's always 'something' you're forgetting.
             <input type="range" id="q6" min="1" max="5"> <br>
-            7==============
+            7) You're not a morning person... At all.
             <input type="range" id="q7" min="1" max="5"> <br>
-            8==============
+            8) #Fruits before #Fructose.
             <input type="range" id="q8" min="1" max="5"> <br>
-            9==============
+            9) You prefer neither Tea nor Coffee.
             <input type="range" id="q9" min="1" max="5"> <br>
-            10=============
+            10) You'd choose a paper book over an e-book any day. 
             <input type="range" id="q10" min="1" max="5"> <br>
-            <!-- can be created dinamically from array through loop then referanced with i? -->
+            <!-- questions can be created dinamically from array through loop then referanced with i? -->
         </div>
     </form>
     <button id="submit" onclick="sendData()">Submit</button>
-    <a href="./api/friends" target="_blank">Friends API</a>
-
+    <div id="links">
+        <a href="./api/friends" target="_blank">Friends API</a><br>
+        <a href="#">GitHub Repo</a>
+    </div>
     <div id="modal-overlay"></div>
 
     <script>

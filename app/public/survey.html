@@ -87,26 +87,24 @@
         }
 
         #modal {
-            border: red 3px solid;
+            color: cyan;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            max-width: 960px;
-            width: 90%;
-            height: 400px;
+            top: 20vh;
+            left: 50vw;
+            margin: 35vh auto;
+            height: auto;
             max-height: 100%;
             transform: translate(-50%, -50%);
-            background: #fff;
-            overflow: auto;
+            background-image: url(https://p1.pxfuel.com/preview/409/664/1000/fence-fence-grid-grid-green-texture-green-background-web.jpg);
             padding: 25px;
         }
 
-        #modal-image {
-            width: 50%;
+        #friend-pic {
+            min-width: 250px;
+            max-width: 600px;
         }
 
         #modal-overlay {
-            border: springgreen solid 8px;
             position: fixed;
             top: 0;
             left: 0;
@@ -206,7 +204,7 @@
                     console.log(JSON.stringify(closestFriend));
                     const modal = $("<div id='modal'>");
                     let name = $(`<h2>${closestFriend.name}</h2>`);
-                    let img = $(`<img src="${closestFriend.photo}" alt="Your New Best Friend">`)
+                    let img = $(`<img src="${closestFriend.photo}" id="friend-pic" alt="Your New Best Friend">`)
                     modal.append(name, img);
                     $("#modal-overlay").append(modal);
                     $("#modal-overlay").css("display", "block");

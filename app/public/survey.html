@@ -87,7 +87,11 @@
         }
 
         #modal {
-            color: cyan;
+            font-size: 40px;
+            font-weight: bold;
+            color: rgb(222, 253, 44);
+            text-shadow: 
+                2px 2px 1px rgb(139, 130, 3);
             position: fixed;
             top: 20vh;
             left: 50vw;
@@ -114,6 +118,24 @@
             display: none;
         }
 
+        #home-btn:hover,
+        a:hover{
+            color: honeydew;
+        }
+        #submit:hover{
+            left: 17.5vw;
+            bottom: 19.35vh;
+            height: 150px;
+            width: 150px;
+            font-size: 40px;
+            font-weight: bold;
+            background-color: rgba(228, 219, 200, 0.35);
+            text-shadow: 
+                2px 2px 1px rgb(18, 138, 138);
+            color: rgb(22, 220, 255);
+            border-color: rgb(57, 69, 94)
+        }
+
     </style>
 
     <header>Survey <br><a href="./home" id="home-btn">Home</a></header>
@@ -126,7 +148,7 @@
             <input type="url" id="image"><br>
         </div>
         <div class="survey">
-            Slide the bar  along the 5 points as needed. <br>[Left(Agree) || Middle(Neutral) || Right(Disagree)]. <br><br>
+            Slide the bar  along the 5 points as needed. <br>[Left(Disagree) || Middle(Neutral) || Right(Agree)]. <br><br>
             1) You feel drawn to the unusual/unexplainable.
             <input type="range" id="q1" min="1" max="5"> <br>
             2) You always make sure there's enough "You"-time in your week.

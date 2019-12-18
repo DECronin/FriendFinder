@@ -17,20 +17,50 @@
         h1{
             font-size: 140px;
             font-weight: bold;
-            color: rgb(236, 227, 92);
+            color: rgb(136, 84, 156);
             text-shadow: 
                 4px 4px 1px rgb(28, 45, 46);
             position: fixed;
             top: -6vh;
             left: 20vw
         }
+
+        #survey-btn{
+            text-align: center;
+            position: fixed;
+            right: 20vw;
+            bottom: 40vh;
+            background: radial-gradient( rgb(236, 227, 92, 0.7), rgb(150, 87, 150,0.7));
+            color: rgb(55, 218, 177);
+            text-shadow: 
+                2px 2px 1px rgb(17, 83, 66);
+            font-size: 75px;
+            width: 475px;
+            border-radius: 50%;
+            height: 115px;
+            padding-top: 15px;
+            text-decoration: none;
+            border: 3px inset rgb(236, 227, 92, 0.5);
+        }
+
+        #links{
+            position: fixed;
+            bottom: 13vh;
+            right: 30vw;
+            color: white;
+            font-size: 35px;
+        }
+
+        a:hover{
+            color: ivory;
+        }
     </style>
 
     <div>
         <h1>#FriendFinder</h1>
-        <a href="./survey">Go to Survey</a>
+        <a href="./survey" id="survey-btn">Go to Survey</a>
         <div id="links">
-            <a href="./api/friends" target="_blank">Friends API</a>
+            <a href="./api/friends" target="_blank">Friends API</a><br>
             <a href="https://github.com/DECronin/FriendFinder" target="_blank">GitHub Repo</a>
         </div>
     </div>
